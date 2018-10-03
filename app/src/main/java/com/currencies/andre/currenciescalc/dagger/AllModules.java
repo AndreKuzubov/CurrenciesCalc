@@ -1,5 +1,7 @@
 package com.currencies.andre.currenciescalc.dagger;
 
+import android.content.Context;
+
 import com.currencies.andre.currenciescalc.presenter.IFixerCalcPresenter;
 import com.currencies.andre.currenciescalc.presenter.impl.FixerCalcPresenter;
 import com.currencies.andre.currenciescalc.retrofit.IFixerRest;
@@ -17,6 +19,16 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class AllModules {
 
     static private final String HOST = "http://data.fixer.io";
+    private final Context context;
+
+    public AllModules(Context context) {
+        this.context = context;
+    }
+
+    @Provides
+    public Context provideContext() {
+        return context;
+    }
 
     @Provides
     public IFixerCalcPresenter providePresenter(FixerCalcPresenter presenter) {

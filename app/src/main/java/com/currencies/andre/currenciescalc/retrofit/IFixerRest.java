@@ -15,13 +15,16 @@ public interface IFixerRest {
 
 
     @GET("/api/latest?access_key=" + FIXER_API_KEY)
-    Observable<Rates> getRates(@Query("base") String base, @Query("symbols") String symbols);
+    Observable<Rates> getRates(@Query("base") String base);
+
+    @GET("/api/latest?access_key=" + FIXER_API_KEY)
+    Call<Rates> getRatesResponse(@Query("base") String base);
 
     @GET("/api/symbols?access_key=" + FIXER_API_KEY)
     Observable<Symbols> getSymbols();
 
 
-//    @GET("/api/symbols?access_key=" + FIXER_API_KEY)
-//    Call<Symbols> getSymbolsResponse();
+    @GET("/api/symbols?access_key=" + FIXER_API_KEY)
+    Call<Symbols> getSymbolsResponse();
 
 }

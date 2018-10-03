@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">CurrenciesCalc</string>
+    <string name="base_currency">Base currency</string>
+    <string name="base_amount">Base amount</string>
+    <string name="target_amount">Target amount</string>
+    <string name="equals">equals</string>
+    <string name="base_currency_access_restricted">Base currency access restricted</string>
 </resources>

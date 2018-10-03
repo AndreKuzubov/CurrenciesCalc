@@ -9,16 +9,16 @@ public class Rates {
 
     @SerializedName("base")
     @Expose
-    String base;
+    public String base;
 
 
     @SerializedName("date")
     @Expose
-    String date;
+    public String date;
 
     @SerializedName("rates")
     @Expose
-    Map<String, Float> Rates;
+    public Map<String, Float> rates;
 
 
 }
