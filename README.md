@@ -1,7 +1,7 @@
 # CurrenciesCalc
 
 The application calculate amount for currency pair. Using rest api service of http://firex.io/. 
-Design build like as google currency conventer. 
+Design has builded like as google currency conventer. 
 
 
 ## Run
