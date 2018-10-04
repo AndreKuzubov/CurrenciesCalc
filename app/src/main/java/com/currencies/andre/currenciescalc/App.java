@@ -4,7 +4,11 @@ import android.app.Application;
 
 import com.currencies.andre.currenciescalc.dagger.AllModules;
 import com.currencies.andre.currenciescalc.dagger.AppComponent;
+import com.currencies.andre.currenciescalc.dagger.AppEnvironment;
 import com.currencies.andre.currenciescalc.dagger.DaggerAppComponent;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 public class App extends Application {
 
@@ -19,7 +23,9 @@ public class App extends Application {
         super.onCreate();
         appComponent = DaggerAppComponent
                 .builder()
-                .allModules(new AllModules(getApplicationContext()))
+                .allModules(new AllModules(
+                        new AppEnvironment(getApplicationContext(), Schedulers.io(), AndroidSchedulers.mainThread()
+                        )))
                 .build();
     }
 }

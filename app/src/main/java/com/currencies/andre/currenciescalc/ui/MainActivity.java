@@ -162,10 +162,19 @@ public class MainActivity extends MvpActivity implements IFixerCalcView {
 
 
     @Override
-    public void showError(String message) {
+    public void showErrorNullInput() {
         prProgress.setVisibility(View.INVISIBLE);
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, getString(R.string.null_input), Toast.LENGTH_SHORT).show();
+
     }
+
+    @Override
+    public void showErrorServerError() {
+        prProgress.setVisibility(View.INVISIBLE);
+        Toast.makeText(this, getString(R.string.answer_err), Toast.LENGTH_SHORT).show();
+
+    }
+
 
     @Override
     public void showLoading() {

@@ -10,20 +10,20 @@ import com.currencies.andre.currenciescalc.model.Symbols;
 
 import java.util.List;
 
-@StateStrategyType(AddToEndSingleStrategy.class)
+@StateStrategyType(value = SingleStateStrategy.class, tag = "loading")
 public interface IFixerCalcView extends MvpView {
 
-    @StateStrategyType(SingleStateStrategy.class)
-    public void setSupportedSymbols(Symbols symbols);
 
     @StateStrategyType(SkipStrategy.class)
-    public void showError(String message);
+    public void showErrorNullInput();
 
+    @StateStrategyType(SkipStrategy.class)
+    public void showErrorServerError();
+
+    public void setSupportedSymbols(Symbols symbols);
 
     public void showLoading();
 
-
     public void showRates(Rates rates);
-
 
 }

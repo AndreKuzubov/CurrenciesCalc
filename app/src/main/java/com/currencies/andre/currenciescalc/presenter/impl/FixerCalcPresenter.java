@@ -6,6 +6,7 @@ import android.util.Log;
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.currencies.andre.currenciescalc.R;
+import com.currencies.andre.currenciescalc.dagger.AppEnvironment;
 import com.currencies.andre.currenciescalc.model.Rates;
 import com.currencies.andre.currenciescalc.model.Symbols;
 import com.currencies.andre.currenciescalc.presenter.IFixerCalcPresenter;
@@ -30,27 +31,31 @@ public class FixerCalcPresenter extends MvpPresenter<IFixerCalcView> implements 
 
     private final IFixerRest iFixerRest;
     private final Context context;
+    private final Scheduler ioScheduler;
+    private final Scheduler mainScheduler;
     private Symbols supportedSymbols = null;
 
 
     @Inject
-    public FixerCalcPresenter(IFixerRest iFixerRest, Context context) {
+    public FixerCalcPresenter(AppEnvironment environment, IFixerRest iFixerRest) {
         this.iFixerRest = iFixerRest;
-        this.context = context;
+        this.context = environment.context;
+        this.ioScheduler = environment.ioScheduler;
+        this.mainScheduler = environment.mainScheduler;
     }
 
 
     @Override
-    public void attachView(final IFixerCalcView view) {
-        super.attachView(view);
+    public void attachView(IFixerCalcView originalView) {
+        super.attachView(originalView);
         if (isInRestoreState(getViewState()))
             return;
-
+        final IFixerCalcView view =getViewState();
         if (supportedSymbols == null) {
             view.showLoading();
             iFixerRest.getSymbols()
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeOn(ioScheduler)
+                    .observeOn(mainScheduler)
                     .subscribe(new Consumer<Symbols>() {
                         @Override
                         public void accept(Symbols symbols) throws Exception {
@@ -60,7 +65,7 @@ public class FixerCalcPresenter extends MvpPresenter<IFixerCalcView> implements 
                     }, new Consumer<Throwable>() {
                         @Override
                         public void accept(Throwable throwable) throws Exception {
-                            view.showError(throwable.getMessage());
+                            view.showErrorServerError();
                         }
                     });
         } else {
@@ -71,10 +76,14 @@ public class FixerCalcPresenter extends MvpPresenter<IFixerCalcView> implements 
 
     public void calcAmount(String base, String target) {
         final IFixerCalcView view = getViewState();
+        if (base == null || base.length() == 0 || target == null || target.length() == 0) {
+            view.showErrorNullInput();
+            return;
+        }
         view.showLoading();
         iFixerRest.getRates(base)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(ioScheduler)
+                .observeOn(mainScheduler)
                 .subscribe(new Consumer<Rates>() {
                     @Override
                     public void accept(Rates rates) throws Exception {
@@ -83,7 +92,7 @@ public class FixerCalcPresenter extends MvpPresenter<IFixerCalcView> implements 
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
-                        view.showError(context.getString(R.string.base_currency_access_restricted));
+                        view.showErrorServerError();
                     }
                 });
 

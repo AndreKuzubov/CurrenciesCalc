@@ -21,11 +21,27 @@ android {
     }
 }
 
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:appcompat-v7:27.1.1'
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
     testImplementation 'junit:junit:4.12'
+//    testImplementation "org.mockito:mockito-all:1.10.19"
+//    testImplementation "org.hamcrest:hamcrest-all:1.3"
+//    testImplementation "org.robolectric:robolectric:3.2.2"
+
+    testImplementation "org.mockito:mockito-core:2.8.8"
+    testImplementation "com.google.dagger:dagger:2.17"
+    testImplementation 'org.glassfish:javax.annotation:10.0-b28'
+    testImplementation "com.google.dagger:dagger-compiler:2.17"
+    testImplementation 'org.assertj:assertj-core:2.5.0'
+
+
+//    dagger 2 mock
+    testImplementation 'com.github.fabioCollini.daggermock:daggermock:0.8.4'
+    androidTestImplementation 'com.github.fabioCollini.daggermock:daggermock:0.8.4'
+
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
@@ -63,4 +79,7 @@ dependencies {
     implementation 'com.evernote:android-state:1.3.1'
     // Java only project
     annotationProcessor 'com.evernote:android-state-processor:1.3.1'
+
+
+
 }

@@ -1,6 +1,7 @@
 package com.currencies.andre.currenciescalc.dagger;
 
 import android.content.Context;
+import android.os.Environment;
 
 import com.currencies.andre.currenciescalc.presenter.IFixerCalcPresenter;
 import com.currencies.andre.currenciescalc.presenter.impl.FixerCalcPresenter;
@@ -11,6 +12,7 @@ import java.security.PublicKey;
 
 import dagger.Module;
 import dagger.Provides;
+import io.reactivex.Scheduler;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -19,25 +21,25 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class AllModules {
 
     static private final String HOST = "http://data.fixer.io";
-    private final Context context;
+    private final AppEnvironment environment;
 
-    public AllModules(Context context) {
-        this.context = context;
+    public AllModules(AppEnvironment environment) {
+        this.environment = environment;
     }
 
     @Provides
-    public Context provideContext() {
-        return context;
+    AppEnvironment provideEnvironment() {
+        return environment;
     }
 
     @Provides
-    public IFixerCalcPresenter providePresenter(FixerCalcPresenter presenter) {
+    IFixerCalcPresenter providePresenter(FixerCalcPresenter presenter) {
         return presenter;
     }
 
 
     @Provides
-    public IFixerRest provideRest() {
+    IFixerRest provideRest() {
         return new Retrofit.Builder()
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())

@@ -5,4 +5,6 @@
     <string name="target_amount">Target amount</string>
     <string name="equals">equals</string>
     <string name="base_currency_access_restricted">Base currency access restricted</string>
+    <string name="null_input">Null input!!</string>
+    <string name="answer_err">Answer_err</string>
 </resources>
