@@ -2,6 +2,7 @@
 
 The application calculate amount for currency pair. Using rest api service of http://firex.io/. 
 Design has builded like as google currency conventer. 
+Project write on MVP architecture and pattern Dependency Injection (used Dagger 2, Moxy libs). 
 
 
 ## Run
