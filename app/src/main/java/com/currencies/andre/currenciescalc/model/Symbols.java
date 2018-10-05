@@ -9,7 +9,7 @@ public class Symbols {
 
     @SerializedName("symbols")
     @Expose
-    public Map<String, String> Symbols;
+    public Map<String, String> symbols;
 
 
 }

@@ -88,12 +88,12 @@ public class MainActivity extends MvpActivity implements IFixerCalcView {
     @Override
     public void setSupportedSymbols(Symbols symbols) {
 
-        final List<String> allShortCurrencies = new ArrayList<>(symbols.Symbols.size());
-        final List<String> allCurrencies = new ArrayList<>(symbols.Symbols.size());
+        final List<String> allShortCurrencies = new ArrayList<>(symbols.symbols.size());
+        final List<String> allCurrencies = new ArrayList<>(symbols.symbols.size());
 
-        for (String key : symbols.Symbols.keySet()) {
+        for (String key : symbols.symbols.keySet()) {
             allShortCurrencies.add(key);
-            allCurrencies.add(key + " " + symbols.Symbols.get(key));
+            allCurrencies.add(key + " " + symbols.symbols.get(key));
         }
 
 

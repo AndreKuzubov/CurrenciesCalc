@@ -2,18 +2,13 @@ package com.currencies.andre.currenciescalc.fixerpresenter;
 
 import android.app.Application;
 
-import com.currencies.andre.currenciescalc.dagger.AllModules;
-import com.currencies.andre.currenciescalc.dagger.AppComponent;
 import com.currencies.andre.currenciescalc.dagger.AppEnvironment;
-import com.currencies.andre.currenciescalc.dagger.DaggerAppComponent;
 import com.currencies.andre.currenciescalc.model.Rates;
 import com.currencies.andre.currenciescalc.model.Symbols;
 import com.currencies.andre.currenciescalc.presenter.impl.FixerCalcPresenter;
-import com.currencies.andre.currenciescalc.retrofit.IFixerRest;
 import com.currencies.andre.currenciescalc.ui.MainActivity;
 
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -21,10 +16,8 @@ import org.mockito.Mockito;
 import org.mockito.exceptions.base.MockitoAssertionError;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import java.lang.reflect.Field;
 import java.util.HashMap;
 
-import dagger.Provides;
 import io.reactivex.schedulers.TestScheduler;
 
 import static org.junit.Assert.assertNotNull;
@@ -70,7 +63,7 @@ public class MockyServerTest {
     @Test
     public void testCacheSymbls() throws NoSuchFieldException, IllegalAccessException {
         Symbols symbols = new Symbols();
-        symbols.Symbols = new HashMap<>();
+        symbols.symbols = new HashMap<>();
 
         fixerRestMocky.setAnswer(symbols);
 

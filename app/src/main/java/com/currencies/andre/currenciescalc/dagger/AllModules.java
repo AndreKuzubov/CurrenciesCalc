@@ -28,18 +28,18 @@ public class AllModules {
     }
 
     @Provides
-    AppEnvironment provideEnvironment() {
+    public AppEnvironment provideEnvironment() {
         return environment;
     }
 
     @Provides
-    IFixerCalcPresenter providePresenter(FixerCalcPresenter presenter) {
+    public IFixerCalcPresenter providePresenter(FixerCalcPresenter presenter) {
         return presenter;
     }
 
 
     @Provides
-    IFixerRest provideRest() {
+    public IFixerRest provideRest() {
         return new Retrofit.Builder()
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
